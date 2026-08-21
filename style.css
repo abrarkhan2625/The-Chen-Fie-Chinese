@@ -478,3 +478,141 @@ footer {
         font-size: 13px;
     }
 }
+
+/* =========================
+   GOOGLE REVIEWS
+========================= */
+
+.reviews-section {
+    background: #fffaf0;
+    padding: 80px 5%;
+}
+
+.google-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 30px 0 40px;
+}
+
+.rating-number {
+    font-size: 52px;
+    font-weight: 900;
+    color: #076b78;
+}
+
+.rating-info {
+    text-align: left;
+}
+
+.stars {
+    color: #f5d21a;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.rating-info p {
+    margin: 5px 0 0;
+    color: #657579;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1120px;
+    margin: auto;
+}
+
+.review-card {
+    background: #fff;
+    border: 1px solid #eadfc7;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 12px 35px rgba(20, 63, 72, 0.08);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.review-avatar {
+    width: 50px;
+    height: 50px;
+    background: #076b78;
+    color: white;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.review-header h3 {
+    margin: 0;
+    color: #17454c;
+}
+
+.review-header .stars {
+    font-size: 16px;
+}
+
+.review-text {
+    color: #657579;
+    line-height: 1.7;
+    margin: 20px 0;
+}
+
+.review-date {
+    color: #999;
+    font-size: 13px;
+}
+
+.review-button {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.review-button a {
+    display: inline-block;
+    background: #d9362e;
+    color: white;
+
+    padding: 14px 25px;
+    border-radius: 28px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.review-button a:hover {
+    background: #076b78;
+    transform: translateY(-3px);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-section {
+        padding: 60px 4%;
+    }
+
+    .rating-number {
+        font-size: 42px;
+    }
+
+}
