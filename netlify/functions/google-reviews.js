@@ -2,7 +2,13 @@ exports.handler = async function () {
     const PLACE_ID = process.env.GOOGLE_PLACE_ID;
     const API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 
+    // Check Netlify environment variables
     if (!PLACE_ID || !API_KEY) {
+        console.error("Missing Google environment variables:", {
+            hasPlaceId: !!PLACE_ID,
+            hasApiKey: !!API_KEY
+        });
+
         return {
             statusCode: 500,
             headers: {
@@ -30,27 +36,38 @@ exports.handler = async function () {
 
         const data = await response.json();
 
-        if (!response.ok) {
-            console.error("Google API error:", data);
+        // Log Google's actual response
+        console.log("Google Places API status:", response.status);
+        console.log(
+            "Google Places API response:",
+            JSON.stringify(data)
+        );
 
+        if (!response.ok) {
             return {
                 statusCode: response.status,
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({
+                    error: "Google Places API request failed.",
+                    googleStatus: response.status,
+                    googleResponse: data
+                })
             };
         }
 
         return {
             statusCode: 200,
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Cache-Control": "no-store"
             },
             body: JSON.stringify(data)
         };
+
     } catch (error) {
-        console.error("Function error:", error);
+        console.error("Netlify Function error:", error);
 
         return {
             statusCode: 500,
@@ -58,7 +75,8 @@ exports.handler = async function () {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                error: "Unable to load Google Reviews"
+                error: "Unable to load Google Reviews.",
+                details: error.message
             })
         };
     }
